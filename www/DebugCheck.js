@@ -42,5 +42,17 @@ var DebugCheck = {
                }
           }, error);
      },
+     watch: function (intervalMs) {
+          var lastState = false;
+          setInterval(function () {
+               DebugCheck.isCompromised(function (compromised) {
+                    if (compromised && !lastState) {
+                         lastState = true;
+                         var event = new CustomEvent('DebugCheck.COMPROMISED', { detail: { compromised: true } });
+                         document.dispatchEvent(event);
+                    }
+               });
+          }, intervalMs);
+     },
 };
 module.exports = DebugCheck;

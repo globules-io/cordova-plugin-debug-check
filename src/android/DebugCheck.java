@@ -15,6 +15,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.InputStreamReader;
+import java.lang.reflect.Method;
 
 public class DebugCheck extends CordovaPlugin {
 
@@ -25,7 +26,7 @@ public class DebugCheck extends CordovaPlugin {
         if ("isDebugging".equals(action)) {
 
             boolean javaDebugger    = Debug.isDebuggerConnected();
-            boolean webviewDebugger = WebView.isDebuggingEnabled();
+            boolean webviewDebugger = isWebViewDebuggingEnabledSafe();
             boolean adbEnabled      = isAdbEnabled(ctx);
             boolean emulator        = isEmulator();
             boolean fridaPresent    = isFridaPresent();
@@ -47,7 +48,7 @@ public class DebugCheck extends CordovaPlugin {
                 JSONObject stats = new JSONObject();
 
                 stats.put("javaDebugger",    Debug.isDebuggerConnected());
-                stats.put("webviewDebugger", WebView.isDebuggingEnabled());
+                stats.put("webviewDebugger", isWebViewDebuggingEnabledSafe());
                 stats.put("adbEnabled",      isAdbEnabled(ctx));
                 stats.put("emulated",        isEmulator());
                 stats.put("fridaPresent",    isFridaPresent());
@@ -60,6 +61,18 @@ public class DebugCheck extends CordovaPlugin {
             return true;
         }
 
+        return false;
+    }
+
+    // ---------- WebView debugging (reflection, safe on all SDKs) ----------
+    private boolean isWebViewDebuggingEnabledSafe() {
+        try {
+            Method m = WebView.class.getMethod("isDebuggingEnabled");
+            Object result = m.invoke(null);
+            if (result instanceof Boolean) {
+                return (Boolean) result;
+            }
+        } catch (Throwable ignored) {}
         return false;
     }
 

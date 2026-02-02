@@ -34,5 +34,13 @@ var DebugCheck = {
                [],
           );
      },
+     isCompromised: function (success, error) {
+          DebugCheck.getStats(function (stats) {
+               var compromised = stats.javaDebugger || stats.webviewDebugger || stats.adbEnabled || stats.emulated || stats.fridaPresent || stats.hookFramework;
+               if (typeof success === 'function') {
+                    success(compromised);
+               }
+          }, error);
+     },
 };
 module.exports = DebugCheck;

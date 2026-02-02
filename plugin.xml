@@ -1,6 +1,6 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         id="@globules-io/cordova-plugin-debug-check"
-        version="1.0.0">
+        version="1.1.0">
      <name>cordova-plugin-debug-check</name>
      <description>Cordova plugin to check if an app is being debugged</description>
      <license>MIT</license>

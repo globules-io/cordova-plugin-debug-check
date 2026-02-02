@@ -1,6 +1,6 @@
 {
      "name": "@globules-io/cordova-plugin-debug-check",
-     "version": "1.0.0",
+     "version": "1.1.0",
      "description": "Cordova plugin to check if an app is being debugged",
      "author": {
           "name": "Globules.io"

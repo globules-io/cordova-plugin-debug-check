@@ -14,9 +14,9 @@ Android
 Check in one call if the app is being debugged
 ```bash
 DebugCheck.isDebugging(
-     function (isDebugging) { 
-          console.log('Debugger attached:', isDebugging); 
-          if (isDebugging) {
+     function (bool) { 
+          console.log('Debugger attached:', bool); 
+          if (bool) {
                 // Your policy: kill app, show message, whatever navigator.app.exitApp(); 
           } 
      }, 

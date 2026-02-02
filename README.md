@@ -11,6 +11,7 @@ cordova plugin rm @globules-io/cordova-plugin-debug-check
 Android
 
 ## JS API
+Check in one call if the app is being debugged
 ```bash
 DebugCheck.isDebugging(
      function (isDebugging) { 
@@ -18,6 +19,19 @@ DebugCheck.isDebugging(
           if (isDebugging) {
                 // Your policy: kill app, show message, whatever navigator.app.exitApp(); 
           } 
+     }, 
+     function (err) { 
+          console.error('DebugCheck error:', err); 
+     }
+);
+```
+
+Get information
+```bash
+DebugCheck.getStats(
+     function (stats) { 
+          console.log(stats);
+          //{ javaDebugger: true|false, webviewDebugger: true|false, adbEnabled: true|false, emulated: true|false, fridaPresent: true|false, hookFramework: true|false }    
      }, 
      function (err) { 
           console.error('DebugCheck error:', err); 

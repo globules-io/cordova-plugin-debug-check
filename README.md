@@ -38,3 +38,23 @@ DebugCheck.getStats(
      }
 );
 ```
+
+Check if app is compromised
+```bash
+DebugCheck.isCompromised(
+     function (bool) {
+          console.log(true);
+          //if true, app is compromised
+     },
+     function (err) { 
+          console.error('DebugCheck error:', err); 
+     }
+);
+
+```
+
+Recursive check if app is compromised (in milliseconds)
+```bash
+DebugCheck.watch(ms);
+```
+then listen to custom event DebugCheck.COMPROMISED
